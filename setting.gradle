@@ -1,2 +1,0 @@
-rootProject.name = 'bigfoot-gradle-plugins'
-include 'features-gradle-plugin'
