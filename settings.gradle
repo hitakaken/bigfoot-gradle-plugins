@@ -1,0 +1,4 @@
+rootProject.name = 'bigfoot-gradle-plugins'
+
+include 'karaf-features-plugin'
+

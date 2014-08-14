@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: gradle-publish-2.0">
+    <CLASSES>
+      <root url="jar://D:/Tools/gradle-2.0/lib/plugins/gradle-publish-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/Tools/gradle-2.0/src/publish" />
+    </SOURCES>
+  </library>
+</component>

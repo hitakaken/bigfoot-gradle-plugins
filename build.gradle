@@ -1,0 +1,119 @@
+apply plugin: 'idea'
+
+// *****************************************************************************
+//
+// *****************************************************************************
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+
+    version      = '1.0.0.SNAPSHOT'
+    group        = 'bigfoot.framework.gradle.plugin'
+
+    ext {
+        junitVersion     = '4.11'
+        prefix           = 'gradle-plugin'
+        isReleaseVersion = !version.endsWith("SNAPSHOT")
+        gitRoot          = "https://github.com/hitakaken"
+        gitProject       = "https://github.com/hitakaken/bigfoot-gradle-plugins"
+        deploySnapshot   = "http://218.1.116.114/nexus/content/repositories/bigfoot-snapshot"
+
+        if(project.hasProperty('sonatypeUsername') && project.hasProperty('sonatypePassword')) {
+            ciUsr = sonatypeUsername
+            ciPwd = sonatypePassword
+        } else {
+            ciUsr = "$System.env.CI_DEPLOY_USERNAME"
+            ciPwd = "$System.env.CI_DEPLOY_PASSWORD"
+        }
+    }
+
+    repositories {
+        mavenCentral()    
+        mavenLocal()
+    }
+
+    dependencies {
+        compile gradleApi()
+        compile localGroovy()
+
+        testCompile "junit:junit:$junitVersion"
+    }
+
+    jar {
+        baseName = "${project.name}"
+
+        manifest {
+            attributes['Implementation-Title'   ] = "${group}.${project.name}-${project.version}"
+            attributes['Implementation-Version' ] = project.version
+            attributes['Implementation-Vendor'  ] = 'Bigfoot Framework'
+        }
+    }
+
+    // *************************************************************************
+    //
+    // *************************************************************************
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from 'build/docs/javadoc'
+    }
+
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.allSource
+        classifier = 'sources'
+    }
+
+    artifacts {
+        archives jar
+        archives javadocJar
+        archives sourcesJar
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+
+                repository(url: deploySnapshot) {
+                    authentication(
+                        userName: "${project.ciUsr}",
+                        password: "${project.ciPwd}"
+                    )
+                }
+
+                pom {
+                    project {
+                        name = "${project.name}"
+                        description = "${group}.${project.name}"
+                        url = "${project.gitProject}"
+                        packaging = 'jar'
+
+                        licenses {
+                            license {
+                                name = "The Apache Software License, Version 2.0"
+                                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                                distribution = "repo"
+                            }
+                        }
+
+                        scm {
+                            url = "${project.gitProject}"
+                            connection = "scm:git:${project.gitProject}.git"
+                            developerConnection = "scm:git:${project.gitProject}.git"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// *****************************************************************************
+//
+// *****************************************************************************
+
+/*task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}*/
