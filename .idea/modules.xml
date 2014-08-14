@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bigfoot-gradle-plugins.iml" filepath="$PROJECT_DIR$/bigfoot-gradle-plugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/karaf-features-plugin/karaf-features-plugin.iml" filepath="$PROJECT_DIR$/karaf-features-plugin/karaf-features-plugin.iml" />
+    </modules>
+  </component>
+</project>
+
