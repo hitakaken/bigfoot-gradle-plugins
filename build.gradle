@@ -2,24 +2,14 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
-
         maven { url 'http://218.1.116.114/nexus/content/repositories/bigfoot-snapshot' }
-    }
-
-    dependencies {
-        classpath 'bigfoot.framework.gradle.plugin:karaf-features-plugin:1.0.0.SNAPSHOT'
     }
 }
 apply plugin: 'idea'
-apply plugin: 'karaf-features'
 
 // *****************************************************************************
 //
 // *****************************************************************************
-ext.karaf_feature_repos {
-    classpath 'org.apache.karaf.features/standard/3.0.1/xml/features'
-}
-
 
 subprojects {
     apply plugin: 'java'
