@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.karaf.features.core-3.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.karaf.features/org.apache.karaf.features.core/3.0.1/1b55f861ca08f8540fdc9e3c2a9dd7d6abe429e/org.apache.karaf.features.core-3.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.karaf.features/org.apache.karaf.features.core/3.0.1/93367340758483487c0f2d35d447e5e838f0eb4c/org.apache.karaf.features.core-3.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven { url 'http://218.1.116.114/nexus/content/repositories/bigfoot-release' }
+    }
+
+    dependencies {
+        classpath 'bigfoot.framework.gradle.plugin:karaf-features-plugin:1.0.0-RELEASE'
+    }
+}
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'karaf-features'
+features {
+    output = new File("feature.xml")
+    name = "apache-commons"
+    version = "1.0.0-SNAPSHOT"
+    features = [
+        feature{
+            name = "commons-bcel"
+            version = "$apache_commons_bcel_version"
+            bundles = [
+                bundle{
+                    group = "org.apache.servicemix.bundles"
+                    name = "org.apache.servicemix.bundles.bcel"
+                    version = "$apache_commons_bcel_sericemix_bundle_version"
+                },
+                bundle {
+                    group= "org.apache.servicemix.bundles"
+                    name= "org.apache.servicemix.bundles.jakarta-regexp"
+                    version="$apache_jakarta_regexp_sericemix_bundle_version"
+                }
+            ]
+        }
+    ]
+}
+
+

@@ -2,7 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven { url 'http://218.1.116.114/nexus/content/repositories/bigfoot-snapshot' }
+        maven { url 'http://218.1.116.114/nexus/content/repositories/bigfoot-release' }
     }
 }
 apply plugin: 'idea'
@@ -17,7 +17,7 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'maven'
 
-    version      = '1.0.0.SNAPSHOT'
+    version      = "$bigfootVersion"
     group        = 'bigfoot.framework.gradle.plugin'
 
     ext {
@@ -26,7 +26,7 @@ subprojects {
         isReleaseVersion = !version.endsWith("SNAPSHOT")
         gitRoot          = "https://github.com/hitakaken"
         gitProject       = "https://github.com/hitakaken/bigfoot-gradle-plugins"
-        deploySnapshot   = "http://218.1.116.114/nexus/content/repositories/bigfoot-snapshot"
+        deploySnapshot   = "http://218.1.116.114/nexus/content/repositories/bigfoot-release"
 
         if(project.hasProperty('sonatypeUsername') && project.hasProperty('sonatypePassword')) {
             ciUsr = sonatypeUsername
@@ -92,7 +92,7 @@ subprojects {
                 pom {
                     project {
                         name = "${project.name}"
-                        version = '1.0.0.SNAPSHOT'
+                        version = "${project.version}"
                         packaging = 'jar'
                         description = "${group}.${project.name}"
                         url = "${project.gitProject}"
