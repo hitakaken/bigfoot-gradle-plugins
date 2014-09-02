@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: gradle-language-base-2.0">
+    <CLASSES>
+      <root url="jar://D:/Tools/gradle-2.0/lib/plugins/gradle-language-base-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/Tools/gradle-2.0/src/language-base" />
+    </SOURCES>
+  </library>
+</component>

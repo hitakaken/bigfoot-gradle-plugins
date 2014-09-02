@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: gradle-base-services-groovy-2.0">
+    <CLASSES>
+      <root url="jar://D:/Tools/gradle-2.0/lib/gradle-base-services-groovy-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/Tools/gradle-2.0/src/base-services-groovy" />
+    </SOURCES>
+  </library>
+</component>
