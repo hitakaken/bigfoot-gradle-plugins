@@ -14,27 +14,15 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'karaf-features'
 features {
-    output = new File("feature.xml")
-    name = "apache-commons"
-    version = "1.0.0-SNAPSHOT"
-    features = [
-        feature{
-            name = "commons-bcel"
-            version = "$apache_commons_bcel_version"
-            bundles = [
-                bundle{
-                    group = "org.apache.servicemix.bundles"
-                    name = "org.apache.servicemix.bundles.bcel"
-                    version = "$apache_commons_bcel_sericemix_bundle_version"
-                },
-                bundle {
-                    group= "org.apache.servicemix.bundles"
-                    name= "org.apache.servicemix.bundles.jakarta-regexp"
-                    version="$apache_jakarta_regexp_sericemix_bundle_version"
-                }
-            ]
-        }
-    ]
+    output new File("feature.xml")
+    name "apache-commons"
+    version "1.0.0-SNAPSHOT"
+    feature {
+        name "commons-bcel"
+        version "$apache_commons_bcel_version"
+        bundle group:"org.apache.servicemix.bundles", name:"org.apache.servicemix.bundles.bcel", version:"$apache_commons_bcel_sericemix_bundle_version"
+        bundle"org.apache.servicemix.bundles:org.apache.servicemix.bundles.jakarta-regexp:$apache_jakarta_regexp_sericemix_bundle_version"
+    }
 }
 
 

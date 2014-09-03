@@ -15,6 +15,7 @@
  */
 package bigfoot.framework.gradle.plugin
 
+import bigfoot.framework.gradle.plugin.model.Features
 import groovy.xml.MarkupBuilder
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -34,37 +35,6 @@ class KarafFeaturesPlugin implements Plugin<Project> {
         project.task("genFeatures",type:GenFeaturesTask)
     }
 
-    class Features{
-        String name;
-        String version;
-        List<String> repositories = [];
-        List<Feature> features =[];
-        File output = null;
-    }
-
-    class Feature {
-        String name;
-        String version;
-        String description = null;
-        String resolver ="(obr)";
-        String detail = null;
-        List<Dependency> features = [];
-        List<Bundle> bundles = [];
-    }
-
-    class Dependency{
-        String name;
-        String version = null;
-    }
-
-    class Bundle{
-        String group;
-        String name;
-        String version;
-        boolean isStart = false;
-        boolean isWrapped = false;
-        int startLevel = 100;
-    }
 
     class GenFeaturesTask extends DefaultTask{
         public GenFeatureTask() {
