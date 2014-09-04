@@ -21,7 +21,6 @@ subprojects {
     group        = 'bigfoot.framework.gradle.plugin'
 
     ext {
-        junitVersion     = '4.11'
         prefix           = 'gradle-plugin'
         isReleaseVersion = !version.endsWith("SNAPSHOT")
         gitRoot          = "https://github.com/hitakaken"
@@ -46,7 +45,7 @@ subprojects {
         compile gradleApi()
         compile localGroovy()
 
-        testCompile "junit:junit:$junitVersion"
+        testCompile "junit:junit:$junit_version"
     }
 
     jar {
