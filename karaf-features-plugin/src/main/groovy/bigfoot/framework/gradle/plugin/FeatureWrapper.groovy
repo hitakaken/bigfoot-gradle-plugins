@@ -4,11 +4,13 @@ import org.apache.karaf.features.internal.model.*
 import org.gradle.api.internal.project.ProjectInternal;
 
 /**
+ * 封装 Karaf Feature 对象
  * Created by hp on 2014/9/4.
  */
 class FeatureWrapper {
     ProjectInternal project;
     Feature feature;
+    Map self;
 
     Feature getOrigin(){
         return feature;
@@ -24,6 +26,7 @@ class FeatureWrapper {
         if(resolver!=null){
             feature.setResolver(resolver);
         }
+        self = getProjectInfo(this.project);
     }
 
     void name(String name) {
@@ -134,5 +137,36 @@ class FeatureWrapper {
 
     boolean isValid(){
         return feature.name!=null;
+    }
+
+    void project(){
+        name project.name
+        version project.version
+        if(project.extensions.findByName("description")!=null) description(project.extensions.findByName("description"));
+        if(project.extensions.findByName("details")!=null) description(project.extensions.findByName("details"));
+    }
+
+    Map self(Map extInfo){
+        Map map = self.clone();
+        if(extInfo!=null) extInfo.each {k,v->
+            map.put(k,v);
+        }
+        return map;
+    }
+
+    Map project(String path){
+        return getProjectInfo(path!=null&&!path.isEmpty()?project.findProject(path):null);
+    }
+
+    Map getProjectInfo(ProjectInternal project){
+        if(project==null) project = this.project;
+        def map = [
+                group:project.group,name:project.name,version:project.version,
+                wrap:project.extensions.findByName('bundle_wrap')!=null?project.extensions.findByName('bundle_wrap'):false,
+                startLevel:project.extensions.findByName('bundle_start_level')!=null?project.extensions.findByName('bundle_start_level'):null,
+                start:project.project.extensions.findByName('bundle_start')!=null?project.extensions.findByName('bundle_start'):null ,
+                dependency:project.extensions.findByName('bundle_dependency')!=null?project.extensions.findByName('bundle_dependency'):null
+        ];
+        return map;
     }
 }

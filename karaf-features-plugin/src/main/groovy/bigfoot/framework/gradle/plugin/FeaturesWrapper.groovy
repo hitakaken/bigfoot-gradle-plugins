@@ -6,11 +6,13 @@ import org.gradle.util.ConfigureUtil
 
 
 /**
+ * 封装 Karaf Features 对象
  * Created by hp on 2014/9/3.
  */
 class FeaturesWrapper {
     private ProjectInternal project;
     File output;
+    File store;
     String name;
     String version;
     String defaultResolver = null
@@ -29,6 +31,11 @@ class FeaturesWrapper {
         output = project.file(path)
     }
 
+    public void store(Object path){
+        def file = project.file(path)
+        store = file.isDirectory()?file:null;
+    }
+
     public void name(String name){
         this.name = name;
         features.setName(name+(version!=null?"-$version":''));
@@ -44,7 +51,9 @@ class FeaturesWrapper {
     }
 
     public void repositories(List<String> repositories){
-        features.getRepository().addAll(repositories);
+        repositories.each{ repository->
+            repository(repository);
+        }
     }
 
     public void repository(String repository){
@@ -55,11 +64,5 @@ class FeaturesWrapper {
         def featureWrapper = new FeatureWrapper(defaultResolver,project)
         ConfigureUtil.configure(configureClosure, featureWrapper);
         if(featureWrapper.isValid()) features.getFeature().add(featureWrapper.getOrigin());
-    }
-
-    public void project(Closure configureClosure){
-        def projectFeature = new ProjectFeature(defaultResolver,project)
-        ConfigureUtil.configure(configureClosure, projectFeature);
-        if(projectFeature.isValid()) features.getFeature().add(projectFeature.getOrigin());
     }
 }

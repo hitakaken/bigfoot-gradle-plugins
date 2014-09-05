@@ -11,6 +11,7 @@ class KarafFeaturesPluginConvention {
     private ProjectInternal project;
     public KarafFeaturesPluginConvention(ProjectInternal project){
         this.project = project;
+        project.task('build').do
     }
 
     public void features(){
@@ -18,10 +19,10 @@ class KarafFeaturesPluginConvention {
     }
 
     public void features(Closure closure){
-        ConfigureUtil.configure(closure, getFeatures(project));
+        ConfigureUtil.configure(closure, getFeatures());
     }
 
-    private FeaturesWrapper getFeatures(ProjectInternal project){
+    public FeaturesWrapper getFeatures(){
         def features = project.extensions.findByName("features");
         if(features == null){
             features = new FeaturesWrapper(project);
@@ -29,4 +30,15 @@ class KarafFeaturesPluginConvention {
         }
         return features;
     }
+
+    public FeaturesHandler getFeaturesHandler(){
+        def handler = project.extensions.findByName("featuresHandler");
+        if(handler == null){
+            handler = new FeaturesHandler(project);
+            project.extensions.add("featuresHandler",handler);
+        }
+        return handler;
+    }
+
+
 }

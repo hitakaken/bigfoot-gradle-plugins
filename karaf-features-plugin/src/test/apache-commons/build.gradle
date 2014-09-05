@@ -21,8 +21,13 @@ features {
     name "apache-commons"
     version "1.0.0-SNAPSHOT"
     resolver "(obr)"
-    output new File(project.getRootDir(),"feature.xml")
-    project { self() }
+    store  "${project.path}/feature/"
+    //output new File(project.getRootDir(),"feature.xml")
+    repository "mvn:org.apache.karaf.features/standard/$karaf_version/xml/features"
+    feature {
+        project()
+        bundle self
+    }
     // Apache Commons BCEL
     feature {
         name "commons-bcel"

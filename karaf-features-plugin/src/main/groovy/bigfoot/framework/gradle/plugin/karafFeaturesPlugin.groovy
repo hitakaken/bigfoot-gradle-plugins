@@ -26,7 +26,10 @@ class KarafFeaturesPlugin implements Plugin<Project> {
     void apply(Project project) {
         def karafFeaturePluginConvention = new KarafFeaturesPluginConvention(project);
         project.convention.plugins.karafFeature = karafFeaturePluginConvention;
-        project.task("genFeatures",type:KarafFeaturesGenTask)
+        project.task("genKarafFeatures",type:KarafFeaturesGenTask);
+        project.task("listKarafFeatures",type:KarafFeaturesListTask);
+        project.task("buildKarafDependencies",type:KarafDependenciesBuildTask);
+        project.task("buildKarafDependencies").dependsOn("listKarafFeatures");
     }
 }
 

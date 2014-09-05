@@ -6,6 +6,7 @@ import org.gradle.api.specs.Specs
 import org.gradle.api.tasks.TaskAction
 
 /**
+ * 生成 feature.xml
  * Created by hp on 2014/9/4.
  */
 class KarafFeaturesGenTask extends DefaultTask {
@@ -16,18 +17,14 @@ class KarafFeaturesGenTask extends DefaultTask {
     @TaskAction
     def doExecuteTask() {
         def features = project.extensions.findByName("features");
-        if(features!=null && features instanceof FeaturesWrapper){
+        if(features!=null && features instanceof FeaturesWrapper) {
             println features.name;
             println features.version;
             println features.output;
-            if(features.output!=null){
-                def out = new BufferedWriter(new FileWriter(features.output));
-                JaxbUtil.marshal(features.getOrigin(),out);
-                out.close();
-            }else{
-                JaxbUtil.marshal(features.getOrigin(),System.out);
-            }
-
+            def out = features.output!=null?new BufferedWriter(new FileWriter(features.output)):
+                    (features.store!=null?new BufferedWriter(new FileWriter(new File(features.store,"features.xml"))):System.out);
+            JaxbUtil.marshal(features.getOrigin(), out);
+            if(out!=System.out) out.close();
         }
     }
 }
