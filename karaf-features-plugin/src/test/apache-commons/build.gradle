@@ -17,15 +17,23 @@ apply plugin: 'karaf-features'
 
 group = "bigfoot.framework.library"
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+    maven { url 'http://218.1.116.114/nexus/content/repositories/bigfoot-release' }
+}
+
 features {
     name "apache-commons"
     version "1.0.0-SNAPSHOT"
     resolver "(obr)"
-    store  "${project.path}/feature/"
+    store  "${project.rootDir}/feature/"
     //output new File(project.getRootDir(),"feature.xml")
     repository "mvn:org.apache.karaf.features/standard/$karaf_version/xml/features"
     feature {
         project()
+        feature 'jetty'
         bundle self
     }
     // Apache Commons BCEL

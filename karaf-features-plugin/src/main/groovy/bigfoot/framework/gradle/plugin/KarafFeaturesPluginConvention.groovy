@@ -11,7 +11,6 @@ class KarafFeaturesPluginConvention {
     private ProjectInternal project;
     public KarafFeaturesPluginConvention(ProjectInternal project){
         this.project = project;
-        project.task('build').do
     }
 
     public void features(){

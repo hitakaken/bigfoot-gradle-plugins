@@ -33,7 +33,8 @@ class FeaturesWrapper {
 
     public void store(Object path){
         def file = project.file(path)
-        store = file.isDirectory()?file:null;
+        store = !file.exists() || file.isDirectory()?file:null;
+        if(store!=null && !store.exists()) store.mkdirs();
     }
 
     public void name(String name){

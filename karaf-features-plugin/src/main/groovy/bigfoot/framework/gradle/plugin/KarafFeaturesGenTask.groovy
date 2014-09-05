@@ -18,9 +18,6 @@ class KarafFeaturesGenTask extends DefaultTask {
     def doExecuteTask() {
         def features = project.extensions.findByName("features");
         if(features!=null && features instanceof FeaturesWrapper) {
-            println features.name;
-            println features.version;
-            println features.output;
             def out = features.output!=null?new BufferedWriter(new FileWriter(features.output)):
                     (features.store!=null?new BufferedWriter(new FileWriter(new File(features.store,"features.xml"))):System.out);
             JaxbUtil.marshal(features.getOrigin(), out);
